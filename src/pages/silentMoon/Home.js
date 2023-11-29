@@ -1,9 +1,12 @@
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { NavigationContainer } from '@react-navigation/native'
+import LogIn from './CreateAccount'
 
 
-const Home = () => {
+const Home = ({navigation}) => {
   const image = 'https://cdn.hashnode.com/res/hashnode/image/upload/v1701258288474/45c3eee0-e3e7-4d6b-afd3-1cbcfbbcbb01.png'
   const logo = 'https://cdn.hashnode.com/res/hashnode/image/upload/v1701258301616/11ad2c52-31c5-4e93-83e3-f623b1325dcc.png'
   return (
@@ -31,13 +34,16 @@ const Home = () => {
                   ]}
                   //   onPress={loginAction}
                   >
-                    <Text style={styles.buttonText}>SIGN IN</Text>
+                    <Text
+                      onPress={() => navigation.navigate('LogIn')}
+                     style={styles.buttonText}>SIGN IN</Text>
               </Pressable>
           </View>
           <View style={styles.footerContainer}>
             <Text style={styles.footer}>
               ALREADY HAVE AN ACCOUNT? 
-              <Pressable><Text  style={styles.footer}>LOG IN</Text></Pressable>
+              <Pressable>
+                <Text  style={styles.footer}>LOG IN</Text></Pressable>
             </Text>
           </View>
         </View>
