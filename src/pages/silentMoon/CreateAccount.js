@@ -4,22 +4,16 @@ import CheckBox from '@react-native-community/checkbox';
 import { useState } from 'react';
 import { FontAwesome, AntDesign, Ionicons } from '@expo/vector-icons';
 import { FacebookBtn } from '../../components/silentMoon/facebookBtn';
-// import { GoogleButton } from '../../components/silentMoon/facebookBtn';
 
 
 
-const LogIn = () => {
+const LogIn = ({navigation}) => {
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
     // const facebookBtn = 'CONTINUE WITH FACEBOOK'
     // const googleBtn = 'CONTINUE WITH GOOGLE'
   return (
     <SafeAreaView style={styles.body}>
         <View>
-            <Pressable>
-                <View style={styles.backIconContainer}>
-                <Ionicons name="arrow-back" size={24} style={styles.backIcon}/>            
-                </View>
-            </Pressable>
             <View style={styles.greetingContainer}>
                 <Text style={styles.greetingText}>Create your account</Text>
             </View>
@@ -78,7 +72,9 @@ const LogIn = () => {
                  ]}
                 //   onPress={loginAction}
                  >
-                    <Text style={{fontSize:15, color:'white'}}>Login</Text>
+                    <Text 
+                    onPress={()=> navigation.navigate('Home')}
+                    style={{fontSize:15, color:'white'}}>Login</Text>
                 </Pressable>
             </View>
     
@@ -96,16 +92,6 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         margin:'auto',
         alignItems: 'center'
-    },
-    backIconContainer:{
-        marginHorizontal: 10,
-        marginTop: 40,
-        // marginVertical: 20,
-    },
-    backIcon:{
-        fontSize:40,
-        // padding: 10
-
     },
     greetingText:{
         fontSize: 20,

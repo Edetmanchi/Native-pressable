@@ -1,12 +1,13 @@
 import { StyleSheet, Text, View, SafeAreaView, Pressable,TextInput } from 'react-native'
 import React from 'react'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+import { NavigationContainer } from '@react-navigation/native'
 import { FontAwesome, AntDesign, Ionicons } from '@expo/vector-icons';
 import { FacebookBtn } from '../../components/silentMoon/facebookBtn';
-// import { GoogleButton } from '../../components/silentMoon/facebookBtn';
 
 
 
-const LogIn = () => {
+const LogIn = ({navigation}) => {
     // const facebookBtn = 'CONTINUE WITH FACEBOOK'
     // const googleBtn = 'CONTINUE WITH GOOGLE'
   return (
@@ -55,14 +56,17 @@ const LogIn = () => {
                  ]}
                 //   onPress={loginAction}
                  >
-                    <Text style={{fontSize:12, color:'white',}}>Login</Text>
+                    <Text 
+                      onPress={() => navigation.navigate('Create-account')}
+                    style={{fontSize:12, color:'white',}}>Login</Text>
                 </Pressable>
-                <View>
+                <View style={{display: 'flex', flexDirection: 'column',justifyContent:'space-between', gap:30}}>
                     <Text style={styles.forgot}>Forgot password</Text>
-                    <View style={styles.footer}>
-                        <Text style={styles.footerText1}>ALREADY HAVE AN ACCOUNT ?</Text>
-                        <Text style={styles.footerText2}>LOGIN</Text>
-                    </View>
+                    <Pressable style={styles.footer}>
+                        <Text style={styles.footerText1}>
+                        ALREADY HAVE AN ACCOUNT? </Text>
+                        <Text  style={styles.footerText2}>LOG IN</Text>
+                    </Pressable>
                 </View>
             </View>
           
@@ -187,25 +191,21 @@ const styles = StyleSheet.create({
       footer:{
         display: 'flex',        
         flexDirection:'row',
-        marginTop: 10,
-        alignItems: 'center'
+        marginTop: 12,
+        alignItems: 'center',
+        marginHorizontal: 22
       },
       footerText1:{
         fontSize: 10,
         fontWeight:'bold',
-        textAlign:'center',
-        color: '#696969',
-        textAlign: 'center'
-      },
+        color: '#696969',  },
       footerText2:{
-        fontSize: 10,
+        fontSize: 12,
         textDecorationLine:'underline',
         fontWeight: 'bold',
-        // paddingHorizontal:9,
-        textAlign:'center',
         paddingHorizontal: 10,
-        textAlign: 'center',
-
+        // textAlign: 'center',
+    
       }
 
 })

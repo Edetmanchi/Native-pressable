@@ -35,16 +35,14 @@ const Home = ({navigation}) => {
                   >
                     <Text
                       onPress={() => navigation.navigate('Log-in')}
-                     style={styles.buttonText}>SIGN IN</Text>
+                     style={styles.buttonText}>SIGN UP</Text>
               </Pressable>
           </View>
-          <View style={styles.footerContainer}>
-            <Text style={styles.footer}>
-              ALREADY HAVE AN ACCOUNT? 
-              <Pressable>
-                <Text  style={styles.footer}>LOG IN</Text></Pressable>
-            </Text>
-          </View>
+          <Pressable style={styles.footer}>
+            <Text style={styles.footerText1}>
+              ALREADY HAVE AN ACCOUNT? </Text>
+                <Text  style={styles.footerText2}>LOG IN</Text>
+          </Pressable>
         </View>
        
       </SafeAreaView>
@@ -67,27 +65,31 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection:'row', 
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    gap: 10,
+    // marginBottom: 40
+  
   },
   logo:{
-    height: 50,
+    height: 40,
     width: 30,
     resizeMode:'contain',
   },
   button :{
   backgroundColor:'#663399',
-  paddingVertical:18,
-  width: 300,
+  paddingVertical:15,
+  width: 280,
   borderRadius: 40,
   alignItems:'center',
   justifyContent: 'center',
   // marginHorizontal: 10  ,
-  fontWeight: 'bold'
 },
   buttonText:{
     textAlign: 'center',
     fontSize:15,
-    color: "white"
+    color: "white",
+    fontWeight: 'bold'
+
 
   },
   headerText1:{
@@ -107,11 +109,22 @@ const styles = StyleSheet.create({
     width: 300,
     resizeMode:'cover',
   },
-  footerContainer:{
-    display: 'flex',
-    flexDirection: 'row'
-  },
   footer:{
-    fontSize: 10
+    display: 'flex',        
+    flexDirection:'row',
+    marginTop: 12,
+    alignItems: 'center'
+  },
+  footerText1:{
+    fontSize: 10,
+    fontWeight:'bold',
+    color: '#696969',  },
+  footerText2:{
+    fontSize: 12,
+    textDecorationLine:'underline',
+    fontWeight: 'bold',
+    paddingHorizontal: 10,
+    // textAlign: 'center',
+
   }
 })

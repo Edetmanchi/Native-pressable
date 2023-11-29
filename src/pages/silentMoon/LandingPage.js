@@ -1,38 +1,42 @@
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native'
 import React from 'react'
+import { FontAwesome, AntDesign, Ionicons } from '@expo/vector-icons';
+import { FacebookBtn } from '../../components/silentMoon/facebookBtn';
 import { SafeAreaView } from 'react-native-safe-area-context'
 // import { Image } from 'react-native-svg'
 
 
-const Home = () => {
+const Home = ({navigation}) => {
     const logoImg = "https://cdn.hashnode.com/res/hashnode/image/upload/v1701258301616/11ad2c52-31c5-4e93-83e3-f623b1325dcc.png"
     const ladyImg = "https://cdn.hashnode.com/res/hashnode/image/upload/v1701258307777/a7c81a35-0a59-4509-9ba8-c229a099b0a7.png"
   return (
     <SafeAreaView style={styles.body}>
         <View>
           <View style={styles.logoContainer}>
-            <Text>silent</Text>
+            <Text style={{color:'white'}}>silent</Text>
                 <Image source={{ uri: logoImg }} style={styles.logo}/>
-            <Text>Moon</Text>
+            <Text style={{color:'white'}}>Moon</Text>
           </View>
           <View style={styles.headerContainer}>
                 <Text style={styles.headerText1}>Hi Afsar, Welcome</Text>
                 <View>
-                <Text style={styles.headerText2}>Tothe moon</Text>
+                <Text style={styles.headerText2}>to the moon</Text>
                 </View>
           </View>
-          <View>
+          <View style={styles.imgContainer}>
             <Image source={{uri: ladyImg }} style={styles.image}/>
           </View>
           <View>
             <Pressable 
                 style={({pressed})=>[
                 styles.button,
-                    {backgroundColor :pressed ? '#663399': 'white'}
+                    {backgroundColor :pressed ? 'purple': 'white'}
                 ]}
                
                 >
-                    <Text style={{fontSize:15, color:'black'}}>GET STARTED</Text>
+                    <Text
+                    onPress={()=> navigation.navigate('Create-account')}
+                    style={{fontSize:15, color:'black'}}>GET STARTED</Text>
             </Pressable>
             </View>
         </View>
@@ -49,7 +53,7 @@ const styles = StyleSheet.create({
     backgroundColor:'#663399',
     height:'100%',
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
   logoContainer:{
@@ -64,33 +68,35 @@ const styles = StyleSheet.create({
     resizeMode:'contain',
   },
   imgContainer:{
-    padding: 30,
-    marginTop: 20,
+    // padding: 30,
+    marginVertical: 10,
   },
   image:{
-    height: 390,
+    height: 300,
     width: 300,
     resizeMode:'contain',
   },
    
   headerContainer:{
-    marginHorizontal:10
+    marginHorizontal:20
   },
   headerText1:{
     fontSize: 23,
     fontWeight: 'bold',
     textAlign: 'center',
+    color:'white'
   },
   headerText2:{
-    color: '#808080',
+    color: 'white',
     fontSize: 15,
+    fontWeight:'bold',
     textAlign: 'center',
     padding: 12,
   },
   button :{
     display: 'flex',
     flexDirection: 'row',
-    padding: 16,
+    padding: 14,
     width: '90%',
     borderRadius: 40,
     alignItems:'center',
