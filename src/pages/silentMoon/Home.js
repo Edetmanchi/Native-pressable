@@ -32,10 +32,9 @@ const Home = ({navigation}) => {
                   styles.button,
                       {backgroundColor :pressed ? 'purple': '#663399'}
                   ]}
-                  //   onPress={loginAction}
                   >
                     <Text
-                      onPress={() => navigation.navigate('LogIn')}
+                      onPress={() => navigation.navigate('Log-in')}
                      style={styles.buttonText}>SIGN IN</Text>
               </Pressable>
           </View>
@@ -104,9 +103,9 @@ const styles = StyleSheet.create({
     paddingVertical: 10
   },
   image: {
-    height: 360,
+    height: 290,
     width: 300,
-    resizeMode:'contain',
+    resizeMode:'cover',
   },
   footerContainer:{
     display: 'flex',

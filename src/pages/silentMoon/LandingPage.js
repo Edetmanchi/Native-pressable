@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native'
 import React from 'react'
-import PrimaryBtn from '../../components/silentMoon/primaryBtn'
 import { SafeAreaView } from 'react-native-safe-area-context'
 // import { Image } from 'react-native-svg'
 
@@ -23,7 +22,7 @@ const Home = () => {
                 </View>
           </View>
           <View>
-            <Image source={{uri: ladyImg}} style={styles.image}/>
+            <Image source={{uri: ladyImg }} style={styles.image}/>
           </View>
           <View>
             <Pressable 
@@ -31,7 +30,7 @@ const Home = () => {
                 styles.button,
                     {backgroundColor :pressed ? '#663399': 'white'}
                 ]}
-                //   onPress={loginAction}
+               
                 >
                     <Text style={{fontSize:15, color:'black'}}>GET STARTED</Text>
             </Pressable>
@@ -91,7 +90,6 @@ const styles = StyleSheet.create({
   button :{
     display: 'flex',
     flexDirection: 'row',
-    // backgroundColor:'#663399',
     padding: 16,
     width: '90%',
     borderRadius: 40,
