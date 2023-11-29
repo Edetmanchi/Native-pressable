@@ -13,7 +13,7 @@ const Home = () => {
         <View>
           <View style={styles.logoContainer}>
             <Text>silent</Text>
-            <Image source={{uri:logoImg}} />
+                <Image source={{ uri: logoImg }} style={styles.logo}/>
             <Text>Moon</Text>
           </View>
           <View style={styles.headerContainer}>
@@ -23,15 +23,19 @@ const Home = () => {
                 </View>
           </View>
           <View>
-            <Image source={{uri: ladyImg}}/>
+            <Image source={{uri: ladyImg}} style={styles.image}/>
           </View>
           <View>
-            <PrimaryBtn/>
-            <Text>
-              ALREADY HAVE AN ACCOUNT? 
-              <Pressable><Text>LOG IN</Text></Pressable>
-            </Text>
-          </View>
+            <Pressable 
+                style={({pressed})=>[
+                styles.button,
+                    {backgroundColor :pressed ? '#663399': 'white'}
+                ]}
+                //   onPress={loginAction}
+                >
+                    <Text style={{fontSize:15, color:'black'}}>GET STARTED</Text>
+            </Pressable>
+            </View>
         </View>
        
       </SafeAreaView>
@@ -43,7 +47,8 @@ export default Home
 
 const styles = StyleSheet.create({
     body:{
-    backgroundColor:'#66339',
+    backgroundColor:'#663399',
+    height:'100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -54,10 +59,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  logo:{
+    height: 50,
+    width: 30,
+    resizeMode:'contain',
+  },
   imgContainer:{
     padding: 30,
     marginTop: 20,
   },
+  image:{
+    height: 390,
+    width: 300,
+    resizeMode:'contain',
+  },
+   
   headerContainer:{
     marginHorizontal:10
   },
@@ -71,5 +87,20 @@ const styles = StyleSheet.create({
     fontSize: 15,
     textAlign: 'center',
     padding: 12,
-  }
+  },
+  button :{
+    display: 'flex',
+    flexDirection: 'row',
+    // backgroundColor:'#663399',
+    padding: 16,
+    width: '90%',
+    borderRadius: 40,
+    alignItems:'center',
+    justifyContent: 'center',
+    marginHorizontal: 10  ,
+    fontWeight: 'bold'
+
+
+
+},
 })
