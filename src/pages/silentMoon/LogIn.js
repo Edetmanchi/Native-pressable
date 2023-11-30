@@ -34,7 +34,7 @@ const LogIn = ({navigation}) => {
 
     const onPressSend = (formData) => {
         // Perform actions with the validated form data
-        navigation.navigate('Create-account');
+        navigation.navigate('Home');
       };
 
 

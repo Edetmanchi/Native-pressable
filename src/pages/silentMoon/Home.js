@@ -4,9 +4,13 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { NavigationContainer } from '@react-navigation/native'
 import LogIn from './CreateAccount'
+// import Gaming from '../gameon/gaming.svg'
 
 
 const Home = ({navigation}) => {
+
+ 
+
   const image = 'https://cdn.hashnode.com/res/hashnode/image/upload/v1701258288474/45c3eee0-e3e7-4d6b-afd3-1cbcfbbcbb01.png'
   const logo = 'https://cdn.hashnode.com/res/hashnode/image/upload/v1701258301616/11ad2c52-31c5-4e93-83e3-f623b1325dcc.png'
   return (
@@ -16,6 +20,8 @@ const Home = ({navigation}) => {
             <Text>silent</Text>
             <Image source={{ uri: logo }} style={styles.logo}/>
             <Text>Moon</Text>
+            {/* <Gaming style={{height: 30, width: 50}}/> */}
+            
           </View>
           <View style={styles.imgContainer}>
             <Image source={{ uri: image }} style={styles.image} />
@@ -34,7 +40,7 @@ const Home = ({navigation}) => {
                   ]}
                   >
                     <Text
-                      onPress={() => navigation.navigate('Log-in')}
+                      onPress={() => navigation.navigate('Create-account')}
                      style={styles.buttonText}>SIGN UP</Text>
               </Pressable>
           </View>

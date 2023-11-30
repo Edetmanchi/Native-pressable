@@ -15,8 +15,8 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Welcome">
         <Stack.Screen component={Home} name="Welcome" />
-        <Stack.Screen component={LogIn} name="Log-in" />
         <Stack.Screen component={CreateAccount} name="Create-account" />
+        <Stack.Screen component={LogIn} name="Log-in" />
         <Stack.Screen component={LandingPage} name="Home" />
       </Stack.Navigator>
     </NavigationContainer>

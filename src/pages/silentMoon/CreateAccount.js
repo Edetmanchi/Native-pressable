@@ -1,21 +1,84 @@
-import { StyleSheet, Text, View, SafeAreaView, Pressable,TextInput} from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, Pressable,TextInput, Alert} from 'react-native'
 import React from 'react'
 import CheckBox from '@react-native-community/checkbox';
 import { useState } from 'react';
 import { FontAwesome, AntDesign, Ionicons } from '@expo/vector-icons';
-import { FacebookBtn } from '../../components/silentMoon/facebookBtn';
+// import { FacebookBtn } from '../../components/silentMoon/facebookBtn';
+import * as yup from 'yup'
+import { useForm } from 'react-hook-form';
+import {yupResolver} from '@hookform/resolvers/yup'
+import { Controller } from 'react-hook-form';
+
 
 
 
 const LogIn = ({navigation}) => {
     const [toggleCheckBox, setToggleCheckBox] = useState(false)
-    // const facebookBtn = 'CONTINUE WITH FACEBOOK'
-    // const googleBtn = 'CONTINUE WITH GOOGLE'
+    
+
+    const schema = yup.object().shape({
+        name: yup 
+        .string()
+        .required('name is required'),
+        email: yup
+          .string()
+          .required('Email is required')
+          .email('Invalid email'),
+        password: yup
+          .string()
+          .required('Password is required')
+          .min(8, 'Password must contain at least 8 characters'),
+    });
+    const {control,handleSubmit,formState: {errors}} = useForm({resolver: yupResolver(schema),
+        defaultValues: {
+            name: '',
+          email: '',
+          password: '',
+        },
+    });
+
+    const onPressSend = () => {
+        // try {
+            // const response = await fetch('your_registration_api_endpoint', {
+            // method: 'POST',
+            // headers: {
+            //     'Content-Type': 'application/json',
+            // },
+            // body: JSON.stringify(formData),
+            // });
+    
+            if (schema) {
+                Alert.alert('Account Created !', 'proceed to login ?', [
+                    {
+                    text: 'Cancel',
+                    onPress: () => navigation.navigate('Home'),
+                    style: 'cancel',
+                    },
+                    {text: 'OK', onPress: () => navigation.navigate('Login')},
+                ]);
+                 
+            // Registration successful, navigate to the login screen
+            
+            } else {
+                Alert.alert('Error :', 'Registration failed. Please try again', [
+                {text: 'OK', onPress: () => navigation.navigate('Create-account')},
+
+                ]);
+        
+            }
+        // } catch (error) {
+        //     ('Error during registration:', error);
+        // }
+    };
+
+
+
+
   return (
     <SafeAreaView style={styles.body}>
         <View>
             <View style={styles.greetingContainer}>
-                <Text style={styles.greetingText}>Create your account</Text>
+                <Text style={styles.greetingText}>Create your account !</Text>
             </View>
             <View>
                 <Pressable style={styles.button}>
@@ -32,30 +95,74 @@ const LogIn = ({navigation}) => {
             <View>
                 <Text style={styles.inputHeaderText}>OR LOGIN WITH EMAIL</Text>
             </View>
+
+
+
+
             <View>
-                <TextInput
-                    style={styles.inputField}
-                    value={Text}
-                    placeholder="name"
-                    keyboardType='default'
-                />
+                <View>
+                    <Controller
+                        control={control}
+                        rules={{
+                            required: true,
+                        }}
+                        render={({ field: { onChange, value } }) => (
+                            <TextInput
+                                value={value}
+                                onChangeText={onChange}
+                                style={styles.inputField}
+                                placeholder="name"
+                                keyboardType='default'
+                            />
+                        )}
+                        name="name"
+                    />
+                    {errors.name && <Text>{errors.name.message}</Text>}
+                </View>
+                <View>
+                    <Controller
+                        control={control}
+                        rules={{
+                            required: true,
+                        }}
+                        render={({ field: { onChange, value } }) => (
+                            <TextInput
+                                value={value}
+                                onChangeText={onChange}
+                                style={styles.inputField}
+                                placeholder="anything@gmail.com"
+                                keyboardType='email-address'
+                            />
+                        
+                        )}
+                        name="email"
+                    />
+                    {errors.email && <Text>{errors.email.message}</Text>}
+                </View>
+                <View>
+                    <Controller
+                        control={control}
+                        rules={{
+                            required: true,
+                        }}
+                        render={({ field: { onChange, value } }) => (
+                            <TextInput
+                                value={value}
+                                onChangeText={onChange}
+                                secureTextEntry
+                                style={styles.inputField}
+                                placeholder='enter password'
+                                keyboardType='default'
+                                
+                            />
+                        )}
+                        name="password"
+                    />
+                    {errors.password && <Text>{errors.password.message}</Text>}
+                </View>
+                {/* <Button title="Submit" onPress={handleSubmit(onPressSend)} /> */}
             </View>
-            <View>
-                <TextInput
-                    style={styles.inputField}
-                    value={Text}
-                    placeholder="anything@gmail.com"
-                    keyboardType='email-address'
-                />
-            </View>
-            <View>
-                <TextInput
-                style={styles.inputField}
-                value={Number}
-                placeholder='enter password'
-                keyboardType='numeric'
-                />
-            </View>
+
             <View style={styles.checkboxContainer}>
                 {/* <CheckBox
                     disabled={false}
@@ -73,13 +180,11 @@ const LogIn = ({navigation}) => {
                 //   onPress={loginAction}
                  >
                     <Text 
-                    onPress={()=> navigation.navigate('Home')}
+                    onPress={()=> onPressSend}
                     style={{fontSize:15, color:'white'}}>Login</Text>
                 </Pressable>
             </View>
     
-
-       
         </View>
     </SafeAreaView>
     
@@ -92,6 +197,10 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         margin:'auto',
         alignItems: 'center'
+    },
+    greetingContainer:{
+        marginVertical: 20,
+
     },
     greetingText:{
         fontSize: 20,
