@@ -17,6 +17,7 @@ const Home = ({navigation}) => {
                 <Image source={{ uri: logoImg }} style={styles.logo}/>
             <Text style={{color:'white'}}>Moon</Text>
           </View>
+          {/* page description */}
           <View style={styles.headerContainer}>
                 <Text style={styles.headerText1}>Hi Afsar, Welcome</Text>
                 <View>

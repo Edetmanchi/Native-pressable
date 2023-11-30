@@ -1,17 +1,47 @@
-import { StyleSheet, Text, View, SafeAreaView, Pressable,TextInput } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, Pressable,TextInput, Button,ScrollView } from 'react-native'
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { NavigationContainer } from '@react-navigation/native'
 import { FontAwesome, AntDesign, Ionicons } from '@expo/vector-icons';
-import { FacebookBtn } from '../../components/silentMoon/facebookBtn';
+import * as yup from 'yup'
+import { useForm } from 'react-hook-form';
+import {yupResolver} from '@hookform/resolvers/yup'
+import { Controller } from 'react-hook-form';
 
 
 
 const LogIn = ({navigation}) => {
-    // const facebookBtn = 'CONTINUE WITH FACEBOOK'
-    // const googleBtn = 'CONTINUE WITH GOOGLE'
+
+
+    // schema for form validation
+
+    const schema = yup.object().shape({
+        email: yup
+          .string()
+          .required('Email is required')
+          .email('Invalid email'),
+        password: yup
+          .string()
+          .required('Password is required')
+          .min(8, 'Password must contain at least 8 characters'),
+    });
+    const {control,handleSubmit,formState: {errors}} = useForm({resolver: yupResolver(schema),
+        defaultValues: {
+          email: '',
+          password: '',
+        },
+    });
+
+    const onPressSend = (formData) => {
+        // Perform actions with the validated form data
+        navigation.navigate('Create-account');
+      };
+
+
+    
   return (
     <SafeAreaView style={styles.body}>
+        <ScrollView>
         <View>
             
             <View style={styles.greetingContainer}>
@@ -32,22 +62,55 @@ const LogIn = ({navigation}) => {
             <View>
                 <Text style={styles.inputHeaderText}>OR LOGIN WITH EMAIL</Text>
             </View>
+
+
+
             <View>
-                <TextInput
-                    style={styles.inputField}
-                    value={Text}
-                    placeholder="anything@gmail.com"
-                    keyboardType='email-address'
-                />
+                <View>
+                    <Controller
+                        control={control}
+                        rules={{
+                            required: true,
+                        }}
+                        render={({ field: { onChange, value } }) => (
+                            <TextInput
+                                value={value}
+                                onChangeText={onChange}
+                                style={styles.inputField}
+                                placeholder="anything@gmail.com"
+                                keyboardType='email-address'
+                            />
+                        
+                        )}
+                        name="email"
+                    />
+                    {errors.email && <Text>{errors.email.message}</Text>}
+                </View>
+                <View>
+                    <Controller
+                        control={control}
+                        rules={{
+                            required: true,
+                        }}
+                        render={({ field: { onChange, value } }) => (
+                            <TextInput
+                                value={value}
+                                onChangeText={onChange}
+                                secureTextEntry
+                                style={styles.inputField}
+                                placeholder='enter password'
+                                keyboardType='default'
+                                
+                            />
+                        )}
+                        name="password"
+                    />
+                    {errors.password && <Text>{errors.password.message}</Text>}
+                </View>
+                {/* <Button title="Submit" onPress={handleSubmit(onPressSend)} /> */}
             </View>
-            <View>
-                <TextInput
-                style={styles.inputField}
-                value={Number}
-                placeholder='enter password'
-                keyboardType='numeric'
-                />
-            </View>
+
+
             <View>
                 <Pressable 
                     style={({pressed})=>[
@@ -57,7 +120,8 @@ const LogIn = ({navigation}) => {
                 //   onPress={loginAction}
                  >
                     <Text 
-                      onPress={() => navigation.navigate('Create-account')}
+                        // onPress={handleSubmit(onPressSend)}
+                      onPress={handleSubmit(onPressSend)}
                     style={{fontSize:12, color:'white',}}>Login</Text>
                 </Pressable>
                 <View style={{display: 'flex', flexDirection: 'column',justifyContent:'space-between', gap:30}}>
@@ -72,6 +136,7 @@ const LogIn = ({navigation}) => {
           
    
         </View>
+        </ScrollView>
     </SafeAreaView>
     
   )
